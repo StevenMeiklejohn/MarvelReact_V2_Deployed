@@ -14,3 +14,12 @@ $ git checkout master // return to the master branch
 
 
 git push -f origin gh-pages
+
+
+##In master branch;
+npm run build
+##if not already obtained, grab the homepage route from the resulting text.
+##again, run
+npm run build
+##then...
+npm run deploy
