@@ -2,7 +2,7 @@
   "name": "marvel_api",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/StevenMeiklejohn/MarvelReact_V2",
+  "homepage": "https://github.com/StevenMeiklejohn/MarvelReact_V2_Deployed",
   "dependencies": {
     "animate.css": "^3.7.0",
     "crypto-js": "^3.1.9-1",
@@ -27,12 +27,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "npm run build",
-   "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+
   },
+
   "eslintConfig": {
     "extends": "react-app"
   },
