@@ -23,3 +23,5 @@ npm run build
 npm run build
 ##then...
 npm run deploy
+###
+### This will create (or update) the gh-pages branch and deploy.
