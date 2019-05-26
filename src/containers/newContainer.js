@@ -92,6 +92,7 @@ class New extends React.Component{
   };
 
   get_all_characters_from_db(){
+    console.log("Get all characters from db called");
     const promises = [];
     const request = new Request();
     promises.push(request.get('http://134.209.17.105:8080/api/marvelCharacters?page=0&size=1425'));
@@ -125,13 +126,13 @@ class New extends React.Component{
           resourceURI: character.resourceURI,
           thumbnail: character.thumbnail.path + "." + character.thumbnail.extension
         }
-        console.log("New Post Object", newPostObject);
+        // console.log("New Post Object", newPostObject);
         const request = new Request();
         postPromises.push(request.post('http://134.209.17.105:8080/api/marvelCharacters', newPostObject));
       }
     }
     Promise.all(postPromises)
-    .then(console.log("Character backup complete"));
+    // .then(console.log("Character backup complete"));
   }
 
   backupSingleCharacter(){
@@ -145,7 +146,6 @@ class New extends React.Component{
     }
     const request = new Request();
     request.post('http://134.209.17.105:8080/api/marvelCharacters', newPostObject)
-    .then(console.log("Character posted to db"))
   }
 
 
@@ -192,7 +192,7 @@ class New extends React.Component{
     this.marvel.characters.events(id, num_to_get, index_offset)
     .then(function(res){
       events.push(res.data);
-      console.log("Get events returned data", res.data);
+      // console.log("Get events returned data", res.data);
       this.setState({filterOptionResults: events});
       this.setState({filterSelectorFetching: false});
     }.bind(this))

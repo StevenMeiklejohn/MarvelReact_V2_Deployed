@@ -48,14 +48,17 @@ class LoginContainer extends React.Component{
   handleUserPost(user){
     console.log("handleUserPost called", user);
     const request = new Request();
-    request.post('http://localhost:8080/api/users', user).then(()=> {
+    request.post('https://134.209.17.105:8080/api/users', user).then(()=> {
+      console.log("window", window);
       window.location = '/users'
       console.log("User post sent");
     })
   }
 
-  checkUserDetails(){
-    if(this.state.detailsRetrieved.password === this.state.detailsSubmitted.password){
+  checkUserDetails(detailsRetrieved){
+    console.log("login container: details retrieved", detailsRetrieved);
+    console.log("login container: details submitted", this.state.detailsSubmitted);
+    if(detailsRetrieved.password === this.state.detailsSubmitted.password){
       this.props.loginUser(this.state.detailsSubmitted.userName);
     }else{
       this.props.setLoginFail();
@@ -64,58 +67,58 @@ class LoginContainer extends React.Component{
 
   retrieveUserForChecking(submittedDetails){
     console.log("Retrieve user for checking args", submittedDetails);
+    this.setState({detailsSubmitted: submittedDetails});
     const request = new Request();
-    request.get('http://localhost:8080/api/users/findByUserName/' + submittedDetails.userName)
-    .then((data) => {this.setState({detailsRetrieved: data})})
-    .then((data)=> {this.props.setloggedInUserInfo(this.state.detailsRetrieved)})
-    .then(()=>{this.setState({detailsSubmitted: submittedDetails})})
-    .then(()=>{this.checkUserDetails()});
-  }
+    request.get('https://134.209.17.105:8080/api/users/findByUserName/' + submittedDetails.userName)
+    .then((data) => { this.checkUserDetails(data) })
+    }
+
+// http://134.209.17.105:8080/api/users/findByUserName/SteveMeiklejohn
 
 
 
 
-  render(){
-    // console.log("loginContainer props", this.props);
-    if(this.props.loginComplete){
-      return(
-        <React.Fragment>
-        <div>
-        <h4> Great! </h4>
-        <h4> You are now logged in! </h4>
-        </div>
-        <div className="loginButtonDiv">
+    render(){
+      // console.log("loginContainer props", this.props);
+      if(this.props.loginComplete){
+        return(
+          <React.Fragment>
+          <div>
+          <h4> Great! </h4>
+          <h4> You are now logged in! </h4>
+          </div>
+          <div className="loginButtonDiv">
           {this.renderRedirect()}
           <button className ="loginButton" onClick={this.setRedirect}>Go!</button>
-        </div>
-        </React.Fragment>
-      )
-    }
+          </div>
+          </React.Fragment>
+        )
+      }
 
-    if(this.props.loginFail){
-      return(
-        <React.Fragment>
-        <div>
-        <h4> Sorry </h4>
-        <h4> Your user name or password appears to be incorrect </h4>
-        </div>
-        <div className="loginButtonDiv">
+      if(this.props.loginFail){
+        return(
+          <React.Fragment>
+          <div>
+          <h4> Sorry </h4>
+          <h4> Your user name or password appears to be incorrect </h4>
+          </div>
+          <div className="loginButtonDiv">
           <Login handleUserPost={this.handleUserPost} handleLogin={this.retrieveUserForChecking}/>
-        </div>
-        </React.Fragment>
+          </div>
+          </React.Fragment>
+        )
+      }
+
+      return(
+        <Login handleUserPost={this.handleUserPost} handleLogin={this.retrieveUserForChecking}/>
       )
     }
 
-    return(
-      <Login handleUserPost={this.handleUserPost} handleLogin={this.retrieveUserForChecking}/>
-    )
+
   }
 
 
-}
 
 
 
-
-
-export default LoginContainer
+  export default LoginContainer

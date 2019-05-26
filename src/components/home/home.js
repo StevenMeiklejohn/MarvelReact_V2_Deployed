@@ -58,7 +58,7 @@ class Home extends React.Component{
     // create new date object
     var ts = new Date().getTime();
     // generate random in between 1 and 50000
-    var randomNumber = this.getRandomInt(1, 10000);
+    var randomNumber = this.getRandomInt(1, 1000);
     // target api
     var url = "https://gateway.marvel.com/v1/public/comics/" + randomNumber + "?apikey=7e71a3c8565f24ec32e5c6da8cb7fc01";
     // create a hash using md5 function

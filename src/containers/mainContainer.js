@@ -33,7 +33,7 @@ class MainContainer extends React.Component{
     if(localStorage.getItem('loggedInUserName') != null){
     var retrievedObject = localStorage.getItem('loggedInUser');
     var parsedObject = JSON.parse(retrievedObject);
-    console.log('parsedObject', parsedObject);
+    // console.log('parsedObject', parsedObject);
     this.setState({loggedInUserName: parsedObject.userName}, this.setState({loggedInUser: parsedObject}))
   this.setState({loggedInUser: parsedObject})
   }
@@ -51,7 +51,7 @@ class MainContainer extends React.Component{
   }
 
   setloggedInUserInfo(info){
-    console.log("setLogedInUserInfo function called", info);
+    console.log("setLoggedInUserInfo function called", info);
     localStorage.setItem('loggedInUser', JSON.stringify(info));
     this.setState({loggedInUser: info})
   }
@@ -105,14 +105,14 @@ class MainContainer extends React.Component{
       </div>
       <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/logout" render={() => {
+      <Route exact path="/logout" render={() => {
                       this.logoutUser();
                       return <Home />;
                     }
                   }/>
-      <Route path="/login" render={MyLoginContainer}/>
-      <Route path="/account" render={MyAccountContainer} />
-      <Route path="/new" component={New} />
+      <Route exact path="/login" render={MyLoginContainer}/>
+      <Route exact path="/account" render={MyAccountContainer} />
+      <Route exact path="/new" component={New} />
 
 
       <Route exact path="/recommendations" render = {(props) => {
@@ -132,7 +132,7 @@ class MainContainer extends React.Component{
         return <EditUserContainer id={id} />
       }}
       />
-      <Route path="/users" component={UsersContainer}/>
+      <Route exact path="/users" component={UsersContainer}/>
 
       <Route exact path="/comic/:id" render = {(props) =>{
         const userProp = this.state.loggedInUser;

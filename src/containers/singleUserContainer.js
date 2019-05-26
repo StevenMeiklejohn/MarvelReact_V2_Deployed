@@ -15,14 +15,14 @@ class SingleUserContainer extends React.Component{
 
   componentDidMount(){
     const request = new Request();
-    request.get("http://localhost:8080/api/users/" + this.props.id).then((data) => {
+    request.get("http://134.209.17.105:8080/api/users/" + this.props.id).then((data) => {
       this.setState({user: data})
     })
   }
 
 
   handleDelete(){
-    const url = 'http://localhost:8080/api/users/' + this.props.id;
+    const url = 'http://134.209.17.105:8080/api/users/' + this.props.id;
     let request = new Request();
     request.delete(url).then(()=>{
       window.location = '/users';
