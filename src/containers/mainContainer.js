@@ -11,6 +11,7 @@ import SingleUserContainer from './singleUserContainer'
 import UsersContainer from './usersContainer'
 import LoginContainer from './loginContainer'
 import EditUserContainer from './editUserContainer'
+import Request from './../helpers/request.js'
 
 // const api = require('marvel-api');
 
@@ -21,7 +22,8 @@ class MainContainer extends React.Component{
     this.state = {
       loggedInUserName: null,
       loggedInUser: null,
-      loginFail: false
+      loginFail: false,
+      users: null
     }
     this.loginUser = this.loginUser.bind(this);
     this.setloggedInUserInfo = this.setloggedInUserInfo.bind(this);
@@ -30,14 +32,23 @@ class MainContainer extends React.Component{
   }
 
   componentDidMount(){
-    if(localStorage.getItem('loggedInUserName') != null){
-    var retrievedObject = localStorage.getItem('loggedInUser');
-    var parsedObject = JSON.parse(retrievedObject);
-    // console.log('parsedObject', parsedObject);
-    this.setState({loggedInUserName: parsedObject.userName}, this.setState({loggedInUser: parsedObject}))
-  this.setState({loggedInUser: parsedObject})
-  }
+
+    const request = new Request();
+    request.get("http://134.209.17.105:8080/api/users").then((data) => {
+      this.setState({users: data._embedded.users})
+    })
+
+
+  //   if(localStorage.getItem('loggedInUserName') != null){
+  //   var retrievedObject = localStorage.getItem('loggedInUser');
+  //   var parsedObject = JSON.parse(retrievedObject);
+  //   // console.log('parsedObject', parsedObject);
+  //   this.setState({loggedInUserName: parsedObject.userName}, this.setState({loggedInUser: parsedObject}))
+  //   this.setState({loggedInUser: parsedObject})
+  // }
 }
+
+
 
 
   loginUser(loggedInUser){
@@ -110,8 +121,16 @@ class MainContainer extends React.Component{
                       return <Home />;
                     }
                   }/>
-      <Route exact path="/login" render={MyLoginContainer}/>
+      <Route exact path="/login" render = {(props) => {
+        const users = this.state.users;
+        return <MyLoginContainer users={users} />
+      }}
+      />
+
       <Route exact path="/account" render={MyAccountContainer} />
+
+
+
       <Route exact path="/new" component={New} />
 
 

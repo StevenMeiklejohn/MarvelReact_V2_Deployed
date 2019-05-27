@@ -55,26 +55,29 @@ class LoginContainer extends React.Component{
     })
   }
 
-  checkUserDetails(detailsRetrieved){
-    console.log("login container: details retrieved", detailsRetrieved);
-    console.log("login container: details submitted", this.state.detailsSubmitted);
-    if(detailsRetrieved.password === this.state.detailsSubmitted.password){
-      this.props.loginUser(this.state.detailsSubmitted.userName);
+  checkUserDetails(detailsRetrieved, userForComparison){
+    if(detailsRetrieved.password === userForComparison.password){
+      this.props.loginUser(userForComparison.userName);
+      this.props.setloggedInUserInfo(userForComparison);
     }else{
       this.props.setLoginFail();
     }
   }
 
   retrieveUserForChecking(submittedDetails){
-    console.log("Retrieve user for checking args", submittedDetails);
-    this.setState({detailsSubmitted: submittedDetails});
-    const request = new Request();
-    request.get('https://134.209.17.105:8080/api/users/findByUserName/' + submittedDetails.userName)
-    .then((data) => { this.checkUserDetails(data) })
+    var dbUsers = this.props.users;
+    var userForComparison = null;
+    for(var user of dbUsers){
+      if(user["userName"] == submittedDetails["userName"]){
+        userForComparison = user;
+      }
     }
-
-// http://134.209.17.105:8080/api/users/findByUserName/SteveMeiklejohn
-
+    this.checkUserDetails(submittedDetails, userForComparison);
+    // this.setState({detailsSubmitted: submittedDetails});
+    // const request = new Request();
+    // request.get('http://134.209.17.105:8080/api/users/findByUserName/' + submittedDetails.userName)
+    // .then((data) => { this.checkUserDetails(data) })
+    }
 
 
 

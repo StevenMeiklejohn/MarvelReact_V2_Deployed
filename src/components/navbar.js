@@ -21,6 +21,12 @@ class Navbar extends React.Component{
           <li>
             <Link style={{ textDecoration: 'none', color:'white' }} to="/new">New</Link>
           </li>
+          <li>
+            <Link style={{ textDecoration: 'none', color:'white' }} to="/users">Users</Link>
+          </li>
+          <li>
+            <Link style={{ textDecoration: 'none', color:'white' }} to="/recommendations">Recommendations</Link>
+          </li>
           </ul>
       )
     }
@@ -43,6 +49,12 @@ class Navbar extends React.Component{
           </li>
           <li>
             <Link style={{ textDecoration: 'none', color:'white' }} to="/account">{this.props.user}</Link>
+          </li>
+          <li>
+            <Link style={{ textDecoration: 'none', color:'white' }} to="/users">Users</Link>
+          </li>
+          <li>
+            <Link style={{ textDecoration: 'none', color:'white' }} to="/recommendations">Recommendations</Link>
           </li>
 
         </ul>
