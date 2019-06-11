@@ -12,6 +12,7 @@ class LoginContainer extends React.Component{
       detailsRetrieved: null,
       detailsSubmitted: null,
       loggedInUser: null,
+      newUserComplete: null,
       redirect: false
     }
     this.handleUserPost = this.handleUserPost.bind(this);
@@ -48,9 +49,10 @@ class LoginContainer extends React.Component{
   handleUserPost(user){
     console.log("handleUserPost called", user);
     const request = new Request();
-    request.post('https://134.209.17.105:8080/api/users', user).then(()=> {
-      console.log("window", window);
-      window.location = '/users'
+    request.post('http://134.209.17.105:8080/api/users', user).then(()=> {
+    this.setState({newUserComplete: true});
+      // console.log("window", window);
+      // window.location = '/users'
       console.log("User post sent");
     })
   }
@@ -89,6 +91,22 @@ class LoginContainer extends React.Component{
           <div>
           <h4> Great! </h4>
           <h4> You are now logged in! </h4>
+          </div>
+          <div className="loginButtonDiv">
+          {this.renderRedirect()}
+          <button className ="loginButton" onClick={this.setRedirect}>Go!</button>
+          </div>
+          </React.Fragment>
+        )
+      }
+
+      if(this.state.newUserComplete){
+        return(
+          <React.Fragment>
+          <div>
+          <h4> Congrats! </h4>
+          <h4> You are now a member. </h4>
+          <h4> Feel free to start recommending. </h4>
           </div>
           <div className="loginButtonDiv">
           {this.renderRedirect()}

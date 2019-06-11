@@ -39,7 +39,7 @@ class RecommendationViewSent extends React.Component{
 
   getRecipient(){
     const request = new Request();
-    const url = "http://localhost:8080/api/users/" + this.props.recommendation.recommendedForId;
+    const url = "http://134.209.17.105:8080/api/users/" + this.props.recommendation.recommendedForId;
     console.log("Get recipient url", url);
     request.get(url).then((data) => {
       this.setState({recipient: data}, console.log("Got recipient", this.state.recipient))
@@ -48,7 +48,7 @@ class RecommendationViewSent extends React.Component{
 
   handleRemove(){
     const request = new Request();
-    const url = "http://localhost:8080/api/recommendations/" + this.props.recommendation.id;
+    const url = "http://134.209.17.105:8080/api/recommendations/" + this.props.recommendation.id;
     request.delete(url).then(()=> {
       window.location = '/recommendations'})
   }

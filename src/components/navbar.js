@@ -24,9 +24,6 @@ class Navbar extends React.Component{
           <li>
             <Link style={{ textDecoration: 'none', color:'white' }} to="/users">Users</Link>
           </li>
-          <li>
-            <Link style={{ textDecoration: 'none', color:'white' }} to="/recommendations">Recommendations</Link>
-          </li>
           </ul>
       )
     }
@@ -53,10 +50,6 @@ class Navbar extends React.Component{
           <li>
             <Link style={{ textDecoration: 'none', color:'white' }} to="/users">Users</Link>
           </li>
-          <li>
-            <Link style={{ textDecoration: 'none', color:'white' }} to="/recommendations">Recommendations</Link>
-          </li>
-
         </ul>
       )
     }

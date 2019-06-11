@@ -20,7 +20,7 @@ class SingleComicUserOptions extends React.Component{
   componentDidMount(){
 
     const request = new Request();
-    request.get("http://localhost:8080/api/users").then((data) => {
+    request.get("http://134.209.17.105:8080/api/users").then((data) => {
       this.setState({users: data._embedded.users})
     })
   }
@@ -40,7 +40,7 @@ class SingleComicUserOptions extends React.Component{
     }
     console.log("handleSubmitRec called", recommendation);
     const request = new Request();
-    request.post("http://localhost:8080/api/recommendations", recommendation).then(this.setState({reco_sent: true}));
+    request.post("http://134.209.17.105:8080/api/recommendations", recommendation).then(this.setState({reco_sent: true}));
 
   }
 
