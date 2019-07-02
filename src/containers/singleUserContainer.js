@@ -86,7 +86,9 @@ class SingleUserContainer extends React.Component{
 
       <div className="loginButtonDiv">
       <button className ="loginButton" onClick={this.handleDelete}>Delete</button>
-      <button className ="loginButton" onClick={this.directToEditForm}>Edit</button>
+      <Link to={"/users/edit/" + this.props.id} className="buttonLink">
+      <button className ="loginButton" >Edit</button>
+      </Link>
 
       </div>
       </div>

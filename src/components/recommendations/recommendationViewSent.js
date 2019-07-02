@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Request from './../helpers/request'
+import Request from './../helpers/request';
+import { Redirect } from 'react-router-dom';
 
 const api = require('marvel-api');
 
@@ -10,7 +11,8 @@ class RecommendationViewSent extends React.Component{
     this.state = {
       comic: null,
       sender: null,
-      recipient: null
+      recipient: null,
+      redirect: false
     }
     this.marvel = api.createClient({
       publicKey: "7e71a3c8565f24ec32e5c6da8cb7fc01",
@@ -19,6 +21,8 @@ class RecommendationViewSent extends React.Component{
     this.search_for_comic = this.search_for_comic.bind(this);
     this.getRecipient = this.getRecipient.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.setRedirect = this.setRedirect.bind(this);
+    this.renderRedirect = this.renderRedirect.bind(this);
   }
 
   componentDidMount(){
@@ -49,9 +53,23 @@ class RecommendationViewSent extends React.Component{
   handleRemove(){
     const request = new Request();
     const url = "http://134.209.17.105:8080/api/recommendations/" + this.props.recommendation.id;
-    request.delete(url).then(()=> {
-      window.location = '/recommendations'})
+    request.delete(url);
+    this.setRedirect();
   }
+
+  setRedirect() {
+  this.setState({
+    redirect: true
+  })
+  }
+
+
+renderRedirect(){
+  if (this.state.redirect) {
+    return <Redirect to='/users' />
+  }
+}
+
 
 
 
@@ -63,10 +81,9 @@ class RecommendationViewSent extends React.Component{
       return null;
     }
 
-
-
     return(
       <div className="recommendationView">
+      {this.renderRedirect()}
       <div className="recommendationViewText">
         <h6>For:{this.state.recipient.firstName + " " + this.state.recipient.lastName}</h6>
 

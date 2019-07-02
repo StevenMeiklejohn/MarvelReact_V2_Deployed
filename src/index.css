@@ -390,6 +390,10 @@ button:hover {
       color: white;
  }
 
+ .buttonLink{
+   width: 120px;
+ }
+
 
  .loginButton{
   width: 120px;
