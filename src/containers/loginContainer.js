@@ -67,12 +67,15 @@ class LoginContainer extends React.Component{
   }
 
   retrieveUserForChecking(submittedDetails){
+    console.log("Submitted user data", submittedDetails);
     var dbUsers = this.props.users;
+    console.log("dbUsers", this.props.users);
     var userForComparison = null;
     for(var user of dbUsers){
       if(user["userName"] == submittedDetails["userName"]){
         userForComparison = user;
       }
+      console.log("userForComparison", userForComparison);
     }
     this.checkUserDetails(submittedDetails, userForComparison);
     // this.setState({detailsSubmitted: submittedDetails});
