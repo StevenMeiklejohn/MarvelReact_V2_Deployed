@@ -40,7 +40,7 @@ class Login extends React.Component{
       </div>
       <form onSubmit={this.handleLoginTry}>
         <input type="text" placeholder="User Name" name="userName"/>
-        <input type="text" placeholder="password" name="password"/>
+        <input type="password" placeholder="password" name="password"/>
         <div className="loginButtonDiv">
           <button className ="loginButton" type="submit">Enter</button>
         </div>
